@@ -1,4 +1,5 @@
 #!/bin/sh
 
 screen -S goserv -X kill
-screen -S goserv -dm go run ./snuggle.go
+chmod +x snuggle-world
+screen -S goserv -dm ./snuggle-world

@@ -6,12 +6,15 @@ go:
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq sshpass
+  - export CGO_ENABLED=0 GOOS=linux GOARCH=amd64
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     echo "Fixing hosts file...";
     rm -rf ~/.ssh/known_hosts;
     echo $KNOWN_HOST > ~/.ssh/known_hosts;
+    echo "Moving go binary to working folder...";
+    mv $HOME/gopath/bin/snuggle-world ./
     echo "Pushing files to server...";
     sshpass -p $RSYNC_PASSWORD rsync -r ./ cam@snuggle.world:/home/cam/web/;
     echo "Restarting go script...";
