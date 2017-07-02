@@ -1,0 +1,12 @@
+language: go
+
+go:
+  - 1.8
+
+before-install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq sshpass
+
+after-success:
+  - echo "Pushing to server..."
+  - sshpass -p $RSYNC_PASSWORD rsync -r ./ cam@snuggle.world:/home/cam/web/
