@@ -11,5 +11,7 @@ after_success:
   - echo "Fixing hosts file..."
   - rm -rf ~/.ssh/known_hosts
   - echo $KNOWN_HOST > ~/.ssh/known_hosts
-  - echo "Pushing to server..."
+  - echo "Pushing files to server..."
   - sshpass -p $RSYNC_PASSWORD rsync -r ./ cam@snuggle.world:/home/cam/web/
+  - echo "Restarting go script..."
+  - sshpass -p $RSYNC_PASSWORD ssh cam@snuggle.world 'cd /home/cam/web && ./restart-go.sh'
