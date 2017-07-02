@@ -8,5 +8,8 @@ before_install:
   - sudo apt-get install -qq sshpass
 
 after_success:
+  - echo "Fixing hosts file..."
+  - rm -rf ~/.ssh/known_hosts
+  - echo $KNOWN_HOST > ~/.ssh/known_hosts
   - echo "Pushing to server..."
   - sshpass -p $RSYNC_PASSWORD rsync -r ./ cam@snuggle.world:/home/cam/web/
