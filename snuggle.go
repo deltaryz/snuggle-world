@@ -65,15 +65,9 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		messageArgs := strings.Split(m.Content[1:], " ")
 		switch messageArgs[0] {
 		case "butts":
-			sendMessage(m, "that's hot")
+			dg.ChannelMessageSend(m.ChannelID, "wow that's hot")
 			break
 		}
 	}
 
-}
-
-// Sends a message to the same server as the given message ID
-// (this makes repeated usage take less typing)
-func sendMessage(msg *discordgo.MessageCreate, res string) {
-	dg.ChannelMessageSend(msg.ChannelID, res)
 }
