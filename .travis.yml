@@ -1,4 +1,5 @@
 language: go
+dist: trusty
 
 go:
   - 1.8
@@ -15,8 +16,10 @@ after_success:
     echo $KNOWN_HOST > ~/.ssh/known_hosts;
     echo "Moving go binary to working folder...";
     mv $HOME/gopath/bin/snuggle-world ./;
+    echo "Making bot key file..."
+    echo $SUNBOT_KEY > ./botkey
     echo "Pushing files to server...";
     sshpass -p $RSYNC_PASSWORD rsync -r ./ cam@snuggle.world:/home/cam/web/;
     echo "Restarting go script...";
-    sshpass -p $RSYNC_PASSWORD ssh cam@snuggle.world 'cd /home/cam/web && screen -S goserv -X kill && chmod +x snuggle-world && screen -S goserv -dm ./snuggle-world -t $SUNBOT_KEY';
+    sshpass -p $RSYNC_PASSWORD ssh cam@snuggle.world 'cd /home/cam/web && screen -S goserv -X kill && chmod +x snuggle-world && screen -S goserv -dm ./snuggle-world -t $(cat botkey)';
     fi
