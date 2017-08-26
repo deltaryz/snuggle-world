@@ -18,5 +18,5 @@ after_success:
     echo "Pushing files to server...";
     sshpass -p $RSYNC_PASSWORD rsync -r ./ cam@snuggle.world:/home/cam/web/;
     echo "Restarting go script...";
-    sshpass -p $RSYNC_PASSWORD ssh cam@snuggle.world 'cd /home/cam/web && ./restart-go.sh';
+    sshpass -p $RSYNC_PASSWORD ssh cam@snuggle.world 'cd /home/cam/web && screen -S goserv -X kill && chmod +x snuggle-world && screen -S goserv -dm ./snuggle-world -t $SUNBOT_KEY';
     fi
