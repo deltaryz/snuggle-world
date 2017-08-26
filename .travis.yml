@@ -16,8 +16,8 @@ after_success:
     echo $KNOWN_HOST > ~/.ssh/known_hosts;
     echo "Moving go binary to working folder...";
     mv $HOME/gopath/bin/snuggle-world ./;
-    echo "Making bot key file..."
-    echo $SUNBOT_KEY > ./botkey
+    echo "Making bot key file...";
+    echo $SUNBOT_KEY > ./botkey;
     echo "Pushing files to server...";
     sshpass -p $RSYNC_PASSWORD rsync -r ./ cam@snuggle.world:/home/cam/web/;
     echo "Restarting go script...";
