@@ -65,7 +65,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		var msgArgs []string
 		msgArgs = strings.Split(m.Content[1:], " ")
 		if len(m.Content) > 0 {
-			switch messageArgs[0] {
+			switch msgArgs[0] {
 			case "butts":
 				s.ChannelMessageSend(m.ChannelID, "wow that's hot")
 				break
