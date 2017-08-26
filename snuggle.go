@@ -62,11 +62,14 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	cmdToken := "." // TODO: move to external config
 
 	if m.Content[:1] == cmdToken && m.Content != "" {
-		messageArgs := strings.Split(m.Content[1:], " ")
-		switch messageArgs[0] {
-		case "butts":
-			s.ChannelMessageSend(m.ChannelID, "wow that's hot")
-			break
+		var msgArgs []string
+		msgArgs = strings.Split(m.Content[1:], " ")
+		if len(m.Content) > 0 {
+			switch messageArgs[0] {
+			case "butts":
+				s.ChannelMessageSend(m.ChannelID, "wow that's hot")
+				break
+			}
 		}
 	}
 
