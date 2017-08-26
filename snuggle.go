@@ -61,7 +61,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	cmdToken := "." // TODO: move to external config
 
-	if m.Content[:1] == cmdToken {
+	if m.Content[:1] == cmdToken && m.Content != "" {
 		messageArgs := strings.Split(m.Content[1:], " ")
 		switch messageArgs[0] {
 		case "butts":
